@@ -1,0 +1,47 @@
+[
+    {
+        "nom": "Bulbasaur",
+        "types": [
+            "grass",
+            "poison"
+        ],
+        "pv": 45,
+        "attaque": 49,
+        "defense": 49,
+        "vitesse": 45,
+        "niveau": 1,
+        "exp": 0,
+        "capacites": [],
+        "evolution": null
+    },
+    {
+        "nom": "Bulbasaur",
+        "types": [
+            "grass",
+            "poison"
+        ],
+        "pv": 45,
+        "attaque": 49,
+        "defense": 49,
+        "vitesse": 45,
+        "niveau": 1,
+        "exp": 0,
+        "capacites": [],
+        "evolution": null
+    },
+    {
+        "nom": "Bulbasaur",
+        "types": [
+            "grass",
+            "poison"
+        ],
+        "pv": 45,
+        "attaque": 49,
+        "defense": 49,
+        "vitesse": 45,
+        "niveau": 1,
+        "exp": 0,
+        "capacites": [],
+        "evolution": null
+    }
+]
