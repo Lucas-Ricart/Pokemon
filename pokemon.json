@@ -1,0 +1,33 @@
+[
+    {
+        "nom": "Mewtwo",
+        "types": [
+            "psychic"
+        ],
+        "pv": 106,
+        "attaque": 110,
+        "defense": 90,
+        "vitesse": 130,
+        "niveau": 1,
+        "exp": 0,
+        "capacites": [],
+        "evolution": null,
+        "est_joueur": true
+    },
+    {
+        "nom": "Pidgeot",
+        "types": [
+            "normal",
+            "flying"
+        ],
+        "pv": 83,
+        "attaque": 80,
+        "defense": 75,
+        "vitesse": 101,
+        "niveau": 1,
+        "exp": 0,
+        "capacites": [],
+        "evolution": null,
+        "est_joueur": true
+    }
+]
