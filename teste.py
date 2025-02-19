@@ -3,8 +3,8 @@ import random
 import requests
 import pygame
 import sys
-import os  
-from io import BytesIO
+import os
+import time
 
 # Initialisation de Pygame
 pygame.init()
@@ -28,11 +28,10 @@ TYPE_ADVANTAGES = {
     "plante": {"eau": 2, "feu": 0.5, "plante": 0.5},
 }
 
-
-
 # Chemins des dossiers de sprites
-DOSSIER_SPRITES_JOUEUR = os.path.join("sprites", "sprites", "pokemon", "back")
-DOSSIER_SPRITES_ADVERSAIRE = os.path.join("sprites", "sprites", "pokemon")
+DOSSIER_SPRITES_JOUEUR = os.path.join("sprites", "pokemon", "back")
+DOSSIER_SPRITES_ADVERSAIRE = os.path.join("sprites", "pokemon")
+
 # Fonction pour charger une image locale
 def charger_image_locale(numero, est_joueur=True):
     """Charge une image depuis le dossier de sprites en utilisant le numéro."""
@@ -49,9 +48,10 @@ def charger_image_locale(numero, est_joueur=True):
     except Exception as e:
         print(f"❌ Erreur lors du chargement de l'image pour le Pokémon n°{numero}: {e}")
         return None
+
 # Classe Pokémon
 class Pokemon:
-    def __init__(self, nom, types, pv, attaque, defense, vitesse, niveau=1, exp=0, capacites=None, evolution=None, est_joueur=True):
+    def __init__(self, nom, types, pv, attaque, defense, vitesse, niveau=5, exp=0, capacites=None, evolution=None, est_joueur=True):
         self.nom = nom
         self.types = types
         self.pv = pv
@@ -61,28 +61,58 @@ class Pokemon:
         self.vitesse = vitesse
         self.niveau = niveau
         self.exp = exp
-        self.capacites = capacites if capacites is not None else []  # Liste des capacités
-        self.evolution = evolution  # Nom du Pokémon après évolution
-        self.est_joueur = est_joueur  # True si c'est un Pokémon du joueur, False si c'est un adversaire
-        self.image = None  # L'image sera chargée dynamiquement
-        self.numero = self.recuperer_numero()  # Numéro du Pokémon
+        self.capacites = capacites if capacites is not None else []
+        self.evolution = evolution
+        self.est_joueur = est_joueur
+        self.image = None
+        self.numero = self.recuperer_numero()
         self.charger_image()
+        self.mettre_a_jour_capacites()
 
     def recuperer_numero(self):
-        """Récupère le numéro du Pokémon depuis l'API."""
+        """Retourne le numéro du Pokémon en fonction de son nom."""
+        # Cette méthode peut être améliorée pour récupérer le numéro depuis l'API ou un fichier local
+        return 25  # Exemple: Pikachu
+
+    def mettre_a_jour_capacites(self):
+        """Met à jour les capacités du Pokémon en utilisant l'API."""
         url = f"https://pokeapi.co/api/v2/pokemon/{self.nom.lower()}"
-        response = requests.get(url)
-        if response.status_code == 200:
-            data = response.json()
-            return data["id"]  # Numéro du Pokémon
-        else:
-            print(f"❌ Erreur lors de la récupération du numéro pour {self.nom}.")
-            return None
+        try:
+            response = requests.get(url)
+            time.sleep(1)  # Délai de 1 seconde entre les requêtes
+            if response.status_code == 200:
+                data = response.json()
+                self.capacites = []
+                for move in data["moves"]:
+                    for version in move["version_group_details"]:
+                        if version["level_learned_at"] <= self.niveau:
+                            capacite_nom = move["move"]["name"]
+                            capacite_url = move["move"]["url"]
+                            capacite_data = requests.get(capacite_url).json()
+                            time.sleep(1)  # Délai de 1 seconde entre les requêtes
+                            capacite_puissance = capacite_data.get("power", 40)
+                            capacite_type = capacite_data["type"]["name"] if "type" in capacite_data else "normal"
+                            self.capacites.append(Capacite(capacite_nom, capacite_puissance, capacite_type))
+                
+                # Capacités par défaut si aucune capacité n'est trouvée
+                if not self.capacites:
+                    if "electric" in self.types:
+                        self.capacites.append(Capacite("Éclair", 40, "electric"))
+                    if "psychic" in self.types:
+                        self.capacites.append(Capacite("Psyko", 90, "psychic"))
+                    # Ajouter d'autres capacités par défaut selon les types
+                
+                print(f"{self.nom} a appris de nouvelles capacités !")
+            else:
+                print(f"❌ Erreur lors de la récupération des capacités pour {self.nom}.")
+        except requests.exceptions.ConnectionError as e:
+            print(f"❌ Erreur de connexion : {e}")
 
     def charger_image(self):
         """Charge l'image du Pokémon depuis le dossier de sprites."""
         if self.numero:
             self.image = charger_image_locale(self.numero, self.est_joueur)
+
     def afficher(self, x, y):
         """Affiche le Pokémon à l'écran."""
         if self.image:
@@ -138,25 +168,6 @@ class Pokemon:
             self.charger_image()
             self.mettre_a_jour_capacites()
 
-    def mettre_a_jour_capacites(self):
-        """Met à jour les capacités du Pokémon en utilisant l'API."""
-        url = f"https://pokeapi.co/api/v2/pokemon/{self.nom.lower()}"
-        response = requests.get(url)
-        if response.status_code == 200:
-            data = response.json()
-            self.capacites = []
-            for move in data["moves"]:
-                if move["version_group_details"][0]["level_learned_at"] <= self.niveau:
-                    capacite_nom = move["move"]["name"]
-                    capacite_url = move["move"]["url"]
-                    capacite_data = requests.get(capacite_url).json()
-                    capacite_puissance = capacite_data["power"] if capacite_data["power"] else 40
-                    capacite_type = capacite_data["type"]["name"]
-                    self.capacites.append(Capacite(capacite_nom, capacite_puissance, capacite_type))
-            print(f"{self.nom} a appris de nouvelles capacités !")
-        else:
-            print(f"❌ Erreur lors de la récupération des capacités pour {self.nom}.")
-
 class Capacite:
     def __init__(self, nom, puissance, type_capacite):
         self.nom = nom
@@ -165,7 +176,7 @@ class Capacite:
 
     def __str__(self):
         return f"{self.nom} (Type: {self.type_capacite}, Puissance: {self.puissance})"
-    
+
 class Equipe:
     def __init__(self):
         self.pokemons = self.charger_equipe()
@@ -223,8 +234,6 @@ class Equipe:
             print("❌ Choix invalide, réessayez.")
 
 # Classe Combat
-
-
 class Combat:
     def __init__(self, pokemon_joueur, pokemon_adversaire):
         self.joueur = pokemon_joueur
@@ -299,23 +308,18 @@ def recuperer_pokemon(nom):
     
     if response.status_code == 200:
         data = response.json()
-        types = [t["type"]["name"] for t in data["types"]]
-        pv = data["stats"][0]["base_stat"]
-        attaque = data["stats"][1]["base_stat"]
-        defense = data["stats"][2]["base_stat"]
-        vitesse = data["stats"][5]["base_stat"]
-        
         return {
-            "nom": data["name"].capitalize(),
-            "types": types,
-            "pv": pv,
-            "attaque": attaque,
-            "defense": defense,
-            "vitesse": vitesse,
-            "niveau": 1,
+            "nom": data["name"],
+            "types": [t["type"]["name"] for t in data["types"]],
+            "pv": data["stats"][0]["base_stat"],
+            "attaque": data["stats"][1]["base_stat"],
+            "defense": data["stats"][2]["base_stat"],
+            "vitesse": data["stats"][5]["base_stat"],
+            "niveau": 5,
             "exp": 0,
             "capacites": [],
-            "evolution": None  # À définir selon les besoins
+            "evolution": None,
+            "est_joueur": True
         }
     else:
         print("❌ Erreur lors de la récupération du Pokémon.")
