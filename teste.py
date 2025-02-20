@@ -68,11 +68,17 @@ class Pokemon:
         self.numero = self.recuperer_numero()
         self.charger_image()
         self.mettre_a_jour_capacites()
-
+    
     def recuperer_numero(self):
-        """Retourne le numéro du Pokémon en fonction de son nom."""
-        # Cette méthode peut être améliorée pour récupérer le numéro depuis l'API ou un fichier local
-        return 25  # Exemple: Pikachu
+        """Récupère le numéro du Pokémon depuis l'API."""
+        url = f"https://pokeapi.co/api/v2/pokemon/{self.nom.lower()}"
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            return data["id"]  # Numéro du Pokémon
+        else:
+            print(f"❌ Erreur lors de la récupération du numéro pour {self.nom}.")
+            return None
 
     def mettre_a_jour_capacites(self):
         """Met à jour les capacités du Pokémon en utilisant l'API."""
