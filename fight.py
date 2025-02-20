@@ -74,6 +74,7 @@ class Fight:
         self.draw_my_bar()
         self.draw_my_name()
         self.draw_my_hp()
+        self.draw_xp_bar()
         mouse_x, mouse_y = "lol", "lol"
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
