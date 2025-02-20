@@ -189,3 +189,13 @@ class Window:
         img = font.render(text, True, text_col)
         rect = img.get_rect(center=(x, y))
         self.screen.blit(img, rect)
+
+    def draw_pokemon(self, key):
+        pokemon = pygame.image.load(f"assets/sprites/{key}.png")
+        self.screen.blit(pokemon, (100, 0))
+
+    def draw_my_pokemon(self, key):
+        my_pokemon = pygame.image.load(f"assets/backsprites/{key}.png")
+        self.screen.blit(my_pokemon, (500, 0))
+
+    
