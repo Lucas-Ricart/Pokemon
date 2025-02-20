@@ -18,48 +18,48 @@ class GameMenu:
         # Draw the menu buttons
         self.window.draw_menu_button(
             self.fight_text_button,
-            self.window.screen_width / 4,
+            self.window.SCREEN_WIDTH / 4,
             160
         )
         self.window.draw_menu_button(
             self.team_text_button,
-            self.window.screen_width / 4 + self.window.screen_width / 2,
+            self.window.SCREEN_WIDTH / 4 + self.window.SCREEN_WIDTH / 2,
             160
         )
         self.window.draw_menu_button(
             self.pokedex_text_button,
-            self.window.screen_width / 4,
-            self.window.screen_height - 160
+            self.window.SCREEN_WIDTH / 4,
+            self.window.SCREEN_HEIGHT - 160
         )
         self.window.draw_menu_button(
             self.quit_text_button,
-            self.window.screen_width / 4 + self.window.screen_width / 2,
-            self.window.screen_height - 160
+            self.window.SCREEN_WIDTH / 4 + self.window.SCREEN_WIDTH / 2,
+            self.window.SCREEN_HEIGHT - 160
         )
 
     def selection(self):
         # Define buttons as rectangles for collision detection
         fight_button = pygame.Rect(
-            self.window.screen_width / 4 - self.window.MENU_BUTTON_WIDTH / 2,
+            self.window.SCREEN_WIDTH / 4 - self.window.MENU_BUTTON_WIDTH / 2,
             160 - self.window.MENU_BUTTON_HEIGHT / 2,
             self.window.MENU_BUTTON_WIDTH, self.window.MENU_BUTTON_HEIGHT
         )
 
         team_button = pygame.Rect(
-            self.window.screen_width / 4 + self.window.screen_width / 2 - self.window.MENU_BUTTON_WIDTH / 2,
+            self.window.SCREEN_WIDTH / 4 + self.window.SCREEN_WIDTH / 2 - self.window.MENU_BUTTON_WIDTH / 2,
             160 - self.window.MENU_BUTTON_HEIGHT / 2,
             self.window.MENU_BUTTON_WIDTH, self.window.MENU_BUTTON_HEIGHT
         )
 
         pokedex_button = pygame.Rect(
-            self.window.screen_width / 4 - self.window.MENU_BUTTON_WIDTH / 2,
-            self.window.screen_height - 160 - self.window.MENU_BUTTON_HEIGHT / 2,
+            self.window.SCREEN_WIDTH / 4 - self.window.MENU_BUTTON_WIDTH / 2,
+            self.window.SCREEN_HEIGHT - 160 - self.window.MENU_BUTTON_HEIGHT / 2,
             self.window.MENU_BUTTON_WIDTH, self.window.MENU_BUTTON_HEIGHT
         )
 
         quit_button = pygame.Rect(
-            self.window.screen_width / 4 + self.window.screen_width / 2 - self.window.MENU_BUTTON_WIDTH / 2,
-            self.window.screen_height - 160 - self.window.MENU_BUTTON_HEIGHT / 2,
+            self.window.SCREEN_WIDTH / 4 + self.window.SCREEN_WIDTH / 2 - self.window.MENU_BUTTON_WIDTH / 2,
+            self.window.SCREEN_HEIGHT - 160 - self.window.MENU_BUTTON_HEIGHT / 2,
             self.window.MENU_BUTTON_WIDTH, self.window.MENU_BUTTON_HEIGHT
         )
 

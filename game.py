@@ -1,6 +1,7 @@
 import pygame
 from start_menu import StartMenu
 from game_menu import GameMenu
+from fight import Fight
 
 # Initialize Pygame and clock
 pygame.init()
@@ -15,9 +16,14 @@ class Game:
         # Initialize menus
         self.start_menu = StartMenu()
         self.game_menu = GameMenu()
+
+        # Initialise fight
+        self.fight = Fight()
         
         # Game state and control variables
         self.run = True
+        """self.state = "start_menu"
+        attention test --->"""
         self.state = "start_menu"
         
         # Frame rate settings
@@ -43,6 +49,13 @@ class Game:
             # Handle game continuation state
             if self.state == "continue":
                 self.state = self.game_menu.game_menu(self.state)
+
+            # Handle game fight state
+            if self.state == "fight":
+                test = self.fight.draw_fight(self.state)
+                if test !=("lol", "lol"):
+                    print(test)
+
 
             # Update the display
             pygame.display.update()

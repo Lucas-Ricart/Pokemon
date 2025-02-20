@@ -15,41 +15,40 @@ class StartMenu:
         # Draw the background and title
         self.window.screen.blit(self.window.MENU_BACKGROUND, (0, 0))
         self.window.screen.blit(
-            self.tittle, (self.window.screen_width / 2 - 200, 5)
-        )
+            self.tittle, (self.window.SCREEN_WIDTH / 2 - 200, 5))
 
         # Draw menu buttons
         self.window.draw_menu_button(
             self.continue_text_button,
-            self.window.screen_width / 2,
-            self.window.screen_height / 2 - 40
+            self.window.SCREEN_WIDTH / 2,
+            200
         )
         self.window.draw_menu_button(
             self.restart_text_button,
-            self.window.screen_width / 2,
-            self.window.screen_height / 2 + 60
+            self.window.SCREEN_WIDTH / 2,
+            285
         )
         self.window.draw_menu_button(
             self.quit_text_button,
-            self.window.screen_width / 2,
-            self.window.screen_height / 2 + 160
+            self.window.SCREEN_WIDTH / 2,
+            370
         )
 
     def selection(self):
         # Define buttons as rectangles for collision detection
         continue_button = pygame.Rect(
-            self.window.screen_width / 2 - self.window.MENU_BUTTON_WIDTH / 2,
-            self.window.screen_height / 2 - 40 - self.window.MENU_BUTTON_HEIGHT / 2,
+            self.window.SCREEN_WIDTH / 2 - self.window.MENU_BUTTON_WIDTH / 2,
+            200 - self.window.MENU_BUTTON_HEIGHT / 2,
             self.window.MENU_BUTTON_WIDTH, self.window.MENU_BUTTON_HEIGHT
         )
         restart_button = pygame.Rect(
-            self.window.screen_width / 2 - self.window.MENU_BUTTON_WIDTH / 2,
-            self.window.screen_height / 2 + 60 - self.window.MENU_BUTTON_HEIGHT / 2,
+            self.window.SCREEN_WIDTH / 2 - self.window.MENU_BUTTON_WIDTH / 2,
+            285 - self.window.MENU_BUTTON_HEIGHT / 2,
             self.window.MENU_BUTTON_WIDTH, self.window.MENU_BUTTON_HEIGHT
         )
         quit_button = pygame.Rect(
-            self.window.screen_width / 2 - self.window.MENU_BUTTON_WIDTH / 2,
-            self.window.screen_height / 2 + 160 - self.window.MENU_BUTTON_HEIGHT / 2,
+            self.window.SCREEN_WIDTH / 2 - self.window.MENU_BUTTON_WIDTH / 2,
+            370 - self.window.MENU_BUTTON_HEIGHT / 2,
             self.window.MENU_BUTTON_WIDTH, self.window.MENU_BUTTON_HEIGHT
         )
 
