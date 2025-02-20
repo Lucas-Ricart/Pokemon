@@ -4,22 +4,22 @@ import json
 class Pokemon:
     def __init__(self, key: str, level: int = 1) -> None:
         """Initializes a Pokémon with its attributes and levels it up if needed."""
-        with open("pokedex.json", "r") as f:
-            self.pokedex = json.load(f)  # Load the Pokédex data
+        with open("pokemon-list.json", "r") as f:
+            self.list_pokemon = json.load(f)  # Load the Pokémons data
 
         # Pokémon base stats
         self.key = key
-        self.name = self.pokedex[self.key]["name"]
-        self.type = self.pokedex[self.key]["type"]
-        self.base_hp = self.pokedex[self.key]["hp"]
-        self.base_attack = self.pokedex[self.key]["attack"]
-        self.base_defense = self.pokedex[self.key]["defense"]
-        self.base_special_attack = self.pokedex[self.key]["special_attack"]
-        self.base_special_defense = self.pokedex[self.key]["special_defense"]
-        self.base_speed = self.pokedex[self.key]["speed"]
-        self.base_xp = self.pokedex[self.key]["base_xp"]
+        self.name = self.list_pokemon[self.key]["name"]
+        self.type = self.list_pokemon[self.key]["type"]
+        self.base_hp = self.list_pokemon[self.key]["hp"]
+        self.base_attack = self.list_pokemon[self.key]["attack"]
+        self.base_defense = self.list_pokemon[self.key]["defense"]
+        self.base_special_attack = self.list_pokemon[self.key]["special_attack"]
+        self.base_special_defense = self.list_pokemon[self.key]["special_defense"]
+        self.base_speed = self.list_pokemon[self.key]["speed"]
+        self.base_xp = self.list_pokemon[self.key]["base_xp"]
 
-        evolution_data = self.pokedex[self.key].get("evolution")
+        evolution_data = self.list_pokemon[self.key].get("evolution")
         self.evolution = evolution_data["next"] if evolution_data else None
         self.evolution_level = evolution_data["level"] if evolution_data else None
 
@@ -57,17 +57,17 @@ class Pokemon:
     def evolve(self) -> None:
         """Handles Pokémon evolution."""
         self.key = str(int(self.key) + 1)  # Update key to next Pokémon
-        self.name = self.pokedex[self.key]["name"]
-        self.type = self.pokedex[self.key]["type"]
-        self.base_hp = self.pokedex[self.key]["hp"]
-        self.base_attack = self.pokedex[self.key]["attack"]
-        self.base_defense = self.pokedex[self.key]["defense"]
-        self.base_special_attack = self.pokedex[self.key]["special_attack"]
-        self.base_special_defense = self.pokedex[self.key]["special_defense"]
-        self.base_speed = self.pokedex[self.key]["speed"]
-        self.base_xp = self.pokedex[self.key]["base_xp"]
+        self.name = self.list_pokemon[self.key]["name"]
+        self.type = self.list_pokemon[self.key]["type"]
+        self.base_hp = self.list_pokemon[self.key]["hp"]
+        self.base_attack = self.list_pokemon[self.key]["attack"]
+        self.base_defense = self.list_pokemon[self.key]["defense"]
+        self.base_special_attack = self.list_pokemon[self.key]["special_attack"]
+        self.base_special_defense = self.list_pokemon[self.key]["special_defense"]
+        self.base_speed = self.list_pokemon[self.key]["speed"]
+        self.base_xp = self.list_pokemon[self.key]["base_xp"]
 
-        evolution_data = self.pokedex[self.key].get("evolution")
+        evolution_data = self.list_pokemon[self.key].get("evolution")
         self.evolution = evolution_data["next"] if evolution_data else None
         self.evolution_level = evolution_data["level"] if evolution_data else None
 

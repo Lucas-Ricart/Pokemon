@@ -1,5 +1,6 @@
 import pygame
 from window import Window
+from pokemon import Pokemon
 
 
 class Fight:
@@ -124,3 +125,6 @@ class Fight:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = pygame.mouse.get_pos()
         return (mouse_x, mouse_y)
+    
+
+
