@@ -1,6 +1,6 @@
 import random
-from pokemon import Pokemon
 from utils  import TYPE_ADVANTAGES
+
 class Battle:
     def __init__(self, player, opponent):
         """

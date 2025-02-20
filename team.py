@@ -1,6 +1,5 @@
 import json
 from pokemon import Pokemon
-from utils import load_pokedex
 
 
 class Team:

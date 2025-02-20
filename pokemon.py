@@ -2,7 +2,6 @@ import json
 from moves import Move
 from utils import load_pokedex
 from utils import TYPE_ATTACKS
-
 class Pokemon:
     def __init__(self, name, types, hp, attack, special_attack, defense, speed, level=5, exp=0, evolution=None, evolution_level=None):
         self.name = name
