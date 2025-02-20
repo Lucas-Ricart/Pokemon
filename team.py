@@ -165,3 +165,30 @@ class Team:
         if 0 <= index < len(self.pokemons):
             return self.pokemons[index]
         return None
+
+def capture_pokemon(self, pokemon):
+    """
+    Allows the player to capture a Pokémon and add it to the team.
+    If the team is full, the player must choose a Pokémon to replace.
+    :param pokemon: The Pokémon to capture.
+    """
+    if len(self.pokemons) < 6:
+        self.add_pokemon(pokemon)
+        print(f"✅ {pokemon.name} has been added to your team!")
+    else:
+        print("❌ Your team is full. Choose a Pokémon to replace:")
+        self.display_team()
+        while True:
+            choice = input("\nChoose a Pokémon to replace (1-6) or cancel (0): ")
+            if choice.isdigit():
+                choice = int(choice) - 1
+                if choice == -1:
+                    print("❌ Capture canceled.")
+                    return
+                elif 0 <= choice < len(self.pokemons):
+                    replaced_pokemon = self.pokemons[choice]
+                    self.pokemons[choice] = pokemon
+                    self.save_team()
+                    print(f"✅ {pokemon.name} has replaced {replaced_pokemon.name} in your team!")
+                    return
+            print("❌ Invalid choice, please try again.")
