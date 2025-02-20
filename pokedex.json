@@ -13,7 +13,8 @@
         "evolution": {
             "next": "Ivysaur",
             "level": 16
-        }
+        },
+        "enable": "true"
     },
     "2": {
         "id": 2,
@@ -29,7 +30,8 @@
         "evolution": {
             "next": "Venusaur",
             "level": 32
-        }
+        },
+        "enable": "false"
     },
     "3": {
         "id": 3,
@@ -42,7 +44,8 @@
         "special_defense": 100,
         "speed": 80,
         "base_xp": 236,
-        "evolution": null
+        "evolution": null,
+        "enable": "false"
     },
     "4": {
         "id": 4,
@@ -58,7 +61,8 @@
         "evolution": {
             "next": "Charmeleon",
             "level": 16
-        }
+        },
+        "enable": "true"
     },
     "5": {
         "id": 5,
@@ -74,7 +78,8 @@
         "evolution": {
             "next": "Charizard",
             "level": 36
-        }
+        },
+        "enable": "false"
     },
     "6": {
         "id": 6,
@@ -87,7 +92,8 @@
         "special_defense": 85,
         "speed": 100,
         "base_xp": 240,
-        "evolution": null
+        "evolution": null,
+        "enable": "false"
     },
     "7": {
         "id": 7,
@@ -103,7 +109,8 @@
         "evolution": {
             "next": "Wartortle",
             "level": 16
-        }
+        },
+        "enable": "true"
     },
     "8": {
         "id": 8,
@@ -119,7 +126,8 @@
         "evolution": {
             "next": "Blastoise",
             "level": 36
-        }
+        },
+        "enable": "false"
     },
     "9": {
         "id": 9,
@@ -132,7 +140,8 @@
         "special_defense": 105,
         "speed": 78,
         "base_xp": 239,
-        "evolution": null
+        "evolution": null,
+        "enable": "false"
     },
     "52": {
         "id": 52,
@@ -148,7 +157,8 @@
         "evolution": {
             "next": "Persian",
             "level": 28
-        }
+        },
+        "enable": "false"
     },
     "53": {
         "id": 53,
@@ -161,7 +171,8 @@
         "special_defense": 65,
         "speed": 115,
         "base_xp": 154,
-        "evolution": null
+        "evolution": null,
+        "enable": "false"
     },
     "74": {
         "id": 74,
@@ -177,7 +188,8 @@
         "evolution": {
             "next": "Graveler",
             "level": 25
-        }
+        },
+        "enable": "false"
     },
     "75": {
         "id": 75,
@@ -193,7 +205,8 @@
         "evolution": {
             "next": "Golem",
             "method": "Trade"
-        }
+        },
+        "enable": "false"
     },
     "76": {
         "id": 76,
@@ -206,7 +219,8 @@
         "special_defense": 65,
         "speed": 45,
         "base_xp": 223,
-        "evolution": null
+        "evolution": null,
+        "enable": "false"
     },
     "100": {
         "id": 100,
@@ -222,7 +236,8 @@
         "evolution": {
             "next": "Electrode",
             "level": 30
-        }
+        },
+        "enable": "false"
     },
     "101": {
         "id": 101,
@@ -235,7 +250,8 @@
         "special_defense": 80,
         "speed": 150,
         "base_xp": 172,
-        "evolution": null
+        "evolution": null,
+        "enable": "false"
     },
     "131": {
         "id": 131,
@@ -248,7 +264,8 @@
         "special_defense": 95,
         "speed": 60,
         "base_xp": 187,
-        "evolution": null
+        "evolution": null,
+        "enable": "false"
     },
     "151": {
         "id": 151,
@@ -261,7 +278,8 @@
         "special_defense": 100,
         "speed": 100,
         "base_xp": 270,
-        "evolution": null
+        "evolution": null,
+        "enable": "false"
     },
     "214": {
         "id": 214,
@@ -274,7 +292,8 @@
         "special_defense": 95,
         "speed": 85,
         "base_xp": 175,
-        "evolution": null
+        "evolution": null,
+        "enable": "false"
     },
     "303": {
         "id": 303,
@@ -287,7 +306,8 @@
         "special_defense": 55,
         "speed": 50,
         "base_xp": 133,
-        "evolution": null
+        "evolution": null,
+        "enable": "false"
     },
     "359": {
         "id": 359,
@@ -300,7 +320,8 @@
         "special_defense": 60,
         "speed": 75,
         "base_xp": 163,
-        "evolution": null
+        "evolution": null,
+        "enable": "false"
     },
     "885": {
         "id": 885,
@@ -316,7 +337,8 @@
         "evolution": {
             "next": "Drakloak",
             "level": 50
-        }
+        },
+        "enable": "false"
     },
     "886": {
         "id": 886,
@@ -332,7 +354,8 @@
         "evolution": {
             "next": "Dragapult",
             "level": 60
-        }
+        },
+        "enable": "false"
     },
     "887": {
         "id": 887,
@@ -345,6 +368,7 @@
         "special_defense": 75,
         "speed": 142,
         "base_xp": 300,
-        "evolution": null
+        "evolution": null,
+        "enable": "false"
     }
 }

@@ -1,50 +1,84 @@
 import json
 
+
 class Pokemon:
-    def __init__(self, id, name, type, hp, attack, defense, special_attack, special_defense, speed, base_xp, evolution, lv = 5):
-        self.id = id
-        self.name = name
-        self.type = type
-        self.base_hp = hp
-        self.base_attack = attack
-        self.base_defense = defense
-        self.base_special_attack = special_attack
-        self.base_special_defense = special_defense
-        self.base_speed = speed
-        self.base_xp = base_xp
-        self.evolution = evolution
-        self.lv = lv
-        self.need_xp = 0.8*(self.lv**3)
+    def __init__(self, key: str, level: int = 1) -> None:
+        """Initializes a Pokémon with its attributes and levels it up if needed."""
+        with open("pokedex.json", "r") as f:
+            self.pokedex = json.load(f)  # Load the Pokédex data
 
-    def __str__(self):
-        return f"{self.id} : {self.name} - {self.need_xp}"
+        # Pokémon base stats
+        self.key = key
+        self.name = self.pokedex[self.key]["name"]
+        self.type = self.pokedex[self.key]["type"]
+        self.base_hp = self.pokedex[self.key]["hp"]
+        self.base_attack = self.pokedex[self.key]["attack"]
+        self.base_defense = self.pokedex[self.key]["defense"]
+        self.base_special_attack = self.pokedex[self.key]["special_attack"]
+        self.base_special_defense = self.pokedex[self.key]["special_defense"]
+        self.base_speed = self.pokedex[self.key]["speed"]
+        self.base_xp = self.pokedex[self.key]["base_xp"]
 
-    @classmethod
-    def from_dict(cls, data):
-        return cls(
-            id=data["id"],
-            name=data["name"],
-            type=data["type"],
-            hp=data["hp"],
-            attack=data["attack"],
-            defense=data["defense"],
-            special_attack=data["special_attack"],
-            special_defense=data["special_defense"],
-            speed=data["speed"],
-            base_xp=data["base_xp"],
-            evolution=data.get("evolution", None)
-        )
+        evolution_data = self.pokedex[self.key].get("evolution")
+        self.evolution = evolution_data["next"] if evolution_data else None
+        self.evolution_level = evolution_data["level"] if evolution_data else None
 
-# Charger les données JSON depuis un fichier
-with open("list_pokemon.json", "r") as file:
-    data = json.load(file)
+        self.level = 1
+        self.xp = 0
 
-# Créer une liste d'objets Pokemon
-pokemon_list = [Pokemon.from_dict(p) for p in data.values()]
+        # Initialize stats
+        self.max_hp = self.base_hp
+        self.attack = self.base_attack
+        self.defense = self.base_defense
+        self.special_attack = self.base_special_attack
+        self.special_defense = self.base_special_defense
+        self.speed = self.base_speed
 
-# Afficher les Pokémon chargés
-for pokemon in pokemon_list:
-    print(pokemon)
+        # Level up to the desired level
+        for _ in range(level - 1):
+            self.level_up()
 
+    def level_up(self) -> None:
+        """Increases the level of the Pokémon and updates its stats."""
+        self.level += 1
 
-print(pokemon)
+        # Apply level scaling
+        self.max_hp += 0.2 * self.base_hp
+        self.attack += 0.2 * self.base_attack
+        self.defense += 0.2 * self.base_defense
+        self.special_attack += 0.2 * self.base_special_attack
+        self.special_defense += 0.2 * self.base_special_defense
+        self.speed += 0.2 * self.base_speed
+
+        # Handle evolution
+        if self.evolution and self.level >= self.evolution_level:
+            self.evolve()
+
+    def evolve(self) -> None:
+        """Handles Pokémon evolution."""
+        self.key = str(int(self.key) + 1)  # Update key to next Pokémon
+        self.name = self.pokedex[self.key]["name"]
+        self.type = self.pokedex[self.key]["type"]
+        self.base_hp = self.pokedex[self.key]["hp"]
+        self.base_attack = self.pokedex[self.key]["attack"]
+        self.base_defense = self.pokedex[self.key]["defense"]
+        self.base_special_attack = self.pokedex[self.key]["special_attack"]
+        self.base_special_defense = self.pokedex[self.key]["special_defense"]
+        self.base_speed = self.pokedex[self.key]["speed"]
+        self.base_xp = self.pokedex[self.key]["base_xp"]
+
+        evolution_data = self.pokedex[self.key].get("evolution")
+        self.evolution = evolution_data["next"] if evolution_data else None
+        self.evolution_level = evolution_data["level"] if evolution_data else None
+
+        self.level_up()
+
+    def add_xp(self, enemy_level: int, enemy_base_xp: int) -> None:
+        """Adds XP to the Pokémon and checks for level-up."""
+        needed_xp = 0.8 * (self.level ** 3)
+        self.xp += (enemy_base_xp * enemy_level) / 7
+
+        if self.xp >= needed_xp:
+            over_xp = self.xp - needed_xp
+            self.xp = over_xp  # Carry over extra XP
+            self.level_up()

@@ -46,7 +46,8 @@ class GameMenu:
         )
 
         team_button = pygame.Rect(
-            self.window.SCREEN_WIDTH / 4 + self.window.SCREEN_WIDTH / 2 - self.window.MENU_BUTTON_WIDTH / 2,
+            self.window.SCREEN_WIDTH / 4 + self.window.SCREEN_WIDTH /
+            2 - self.window.MENU_BUTTON_WIDTH / 2,
             160 - self.window.MENU_BUTTON_HEIGHT / 2,
             self.window.MENU_BUTTON_WIDTH, self.window.MENU_BUTTON_HEIGHT
         )
@@ -58,7 +59,8 @@ class GameMenu:
         )
 
         quit_button = pygame.Rect(
-            self.window.SCREEN_WIDTH / 4 + self.window.SCREEN_WIDTH / 2 - self.window.MENU_BUTTON_WIDTH / 2,
+            self.window.SCREEN_WIDTH / 4 + self.window.SCREEN_WIDTH /
+            2 - self.window.MENU_BUTTON_WIDTH / 2,
             self.window.SCREEN_HEIGHT - 160 - self.window.MENU_BUTTON_HEIGHT / 2,
             self.window.MENU_BUTTON_WIDTH, self.window.MENU_BUTTON_HEIGHT
         )
