@@ -5,7 +5,7 @@ from window import Window
 class Fight:
     def __init__(self):
         self.window = Window()
-       
+
     # Draw lv
     def draw_enemy_lv(self):
         # Draw enemy lv
@@ -13,6 +13,7 @@ class Fight:
             "100", self.window.NUMBER_FONT, self.window.LIGHT_GREY, 247, 92)
         self.window.draw_bottomleft_text(
             "100", self.window.NUMBER_FONT, self.window.DARK_GREY, 245, 90)
+
     def draw_my_lv(self):
         # Draw my lv
         self.window.draw_bottomleft_text(
@@ -36,15 +37,18 @@ class Fight:
     # Draw hp bar
     def draw_enemy_bar(self):
         # Draw enemy hp bar
-        pygame.draw.line(self.window.screen, self.window.GREEN, (148, 106), (288, 106), width=8)
+        pygame.draw.line(self.window.screen, self.window.LIGHT_ORANGE,
+                         (148, 106), (288, 106), width=8)
+
     def draw_my_bar(self):
         # Draw my hp bar
-        pygame.draw.line(self.window.screen, self.window.GREEN, (599, 264), (743, 264), width=7)
+        pygame.draw.line(self.window.screen, self.window.DARK_ORANGE,
+                         (599, 264), (743, 264), width=7)
 
     def draw_xp_bar(self):
         # Draw xp bar
-        pygame.draw.line(self.window.screen, self.window.BLUE, (454, 304), (743, 304), width=5)
-
+        pygame.draw.line(self.window.screen, self.window.BLUE,
+                         (454, 304), (743, 304), width=5)
 
     # Draw names
     def draw_enemy_name(self):
@@ -53,14 +57,14 @@ class Fight:
             "Dragapult", self.window.SHADOW_TEXT_FONT, self.window.LIGHT_GREY, 16, 96)
         self.window.draw_bottomleft_text(
             "Dragapult", self.window.TEXT_FONT, self.window.DARK_GREY, 14, 94)
+
     def draw_my_name(self):
         # Draw my name
         self.window.draw_bottomleft_text(
             "Dragapult", self.window.SHADOW_TEXT_FONT, self.window.LIGHT_GREY, 447, 258)
         self.window.draw_bottomleft_text(
             "Dragapult", self.window.TEXT_FONT, self.window.DARK_GREY, 445, 256)
-        
-        
+
     def draw_fight(self, test):
         self.window.draw_fight_decor()
         self.draw_enemy_lv()

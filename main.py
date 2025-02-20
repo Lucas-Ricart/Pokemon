@@ -4,6 +4,6 @@ from game import Game
 if __name__ == "__main__":
     # Create an instance of the Game class
     game = Game()
-    
+
     # Start the game loop
     game.game()
