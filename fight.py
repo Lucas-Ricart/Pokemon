@@ -1,5 +1,4 @@
 import pygame
-import pygame.image
 from window import Window
 
 
