@@ -4,7 +4,9 @@ from window import Window
 
 class GameMenu:
     def __init__(self):
-        # Initialize window and button labels
+        """
+        Initialize the window and button labels.
+        """
         self.window = Window()
         self.fight_text_button = "FIGHT"
         self.team_text_button = "TEAM"
@@ -12,6 +14,9 @@ class GameMenu:
         self.quit_text_button = "QUIT"
 
     def draw(self):
+        """
+        Draw the background and menu buttons on the screen.
+        """
         # Draw the background
         self.window.screen.blit(self.window.MENU_BACKGROUND, (0, 0))
 
@@ -38,6 +43,10 @@ class GameMenu:
         )
 
     def selection(self):
+        """
+        Handle the selection of a menu button based on mouse click position.
+        Returns the updated game state.
+        """
         # Define buttons as rectangles for collision detection
         fight_button = pygame.Rect(
             self.window.SCREEN_WIDTH / 4 - self.window.MENU_BUTTON_WIDTH / 2,
@@ -46,8 +55,8 @@ class GameMenu:
         )
 
         team_button = pygame.Rect(
-            self.window.SCREEN_WIDTH / 4 + self.window.SCREEN_WIDTH /
-            2 - self.window.MENU_BUTTON_WIDTH / 2,
+            self.window.SCREEN_WIDTH / 4 + self.window.SCREEN_WIDTH / 2 -
+            self.window.MENU_BUTTON_WIDTH / 2,
             160 - self.window.MENU_BUTTON_HEIGHT / 2,
             self.window.MENU_BUTTON_WIDTH, self.window.MENU_BUTTON_HEIGHT
         )
@@ -59,8 +68,8 @@ class GameMenu:
         )
 
         quit_button = pygame.Rect(
-            self.window.SCREEN_WIDTH / 4 + self.window.SCREEN_WIDTH /
-            2 - self.window.MENU_BUTTON_WIDTH / 2,
+            self.window.SCREEN_WIDTH / 4 + self.window.SCREEN_WIDTH / 2 -
+            self.window.MENU_BUTTON_WIDTH / 2,
             self.window.SCREEN_HEIGHT - 160 - self.window.MENU_BUTTON_HEIGHT / 2,
             self.window.MENU_BUTTON_WIDTH, self.window.MENU_BUTTON_HEIGHT
         )
@@ -71,21 +80,27 @@ class GameMenu:
         # Event handling loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.state = "false"  # Quit the game
+                # Quit the game
+                self.state = "false"
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 # Check if a button is clicked
                 if fight_button.collidepoint((mouse_x, mouse_y)):
                     self.state = "fight"
-                if team_button.collidepoint((mouse_x, mouse_y)):
+                elif team_button.collidepoint((mouse_x, mouse_y)):
+                    # Set state for Team button (change as needed)
                     self.state = "team"
-                if pokedex_button.collidepoint((mouse_x, mouse_y)):
+                elif pokedex_button.collidepoint((mouse_x, mouse_y)):
+                    # Set state for Pokedex button (change as needed)
                     self.state = "pokedex"
-                if quit_button.collidepoint((mouse_x, mouse_y)):
+                elif quit_button.collidepoint((mouse_x, mouse_y)):
                     self.state = "false"
 
         return self.state
 
     def game_menu(self, state):
+        """
+        Draw the menu, check for button selection, and return the updated state.
+        """
         # Draw the menu and check for selection
         self.draw()
         self.state = state

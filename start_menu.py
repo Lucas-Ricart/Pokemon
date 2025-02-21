@@ -4,6 +4,7 @@ from window import Window
 
 class StartMenu:
     def __init__(self):
+        """Initializes the StartMenu class and assets."""
         # Initialize window and assets
         self.window = Window()
         self.tittle = pygame.image.load("assets/tittle.png")
@@ -12,29 +13,18 @@ class StartMenu:
         self.quit_text_button = "QUIT"
 
     def draw(self):
+        """Draws the background, title, and buttons on the screen."""
         # Draw the background and title
         self.window.screen.blit(self.window.MENU_BACKGROUND, (0, 0))
-        self.window.screen.blit(
-            self.tittle, (self.window.SCREEN_WIDTH / 2 - 200, 5))
+        self.window.screen.blit(self.tittle, (self.window.SCREEN_WIDTH / 2 - 200, 5))
 
         # Draw menu buttons
-        self.window.draw_menu_button(
-            self.continue_text_button,
-            self.window.SCREEN_WIDTH / 2,
-            200
-        )
-        self.window.draw_menu_button(
-            self.restart_text_button,
-            self.window.SCREEN_WIDTH / 2,
-            285
-        )
-        self.window.draw_menu_button(
-            self.quit_text_button,
-            self.window.SCREEN_WIDTH / 2,
-            370
-        )
+        self.window.draw_menu_button(self.continue_text_button, self.window.SCREEN_WIDTH / 2, 200)
+        self.window.draw_menu_button(self.restart_text_button, self.window.SCREEN_WIDTH / 2, 285)
+        self.window.draw_menu_button(self.quit_text_button, self.window.SCREEN_WIDTH / 2, 370)
 
     def selection(self):
+        """Handles button selection and collision detection for mouse clicks."""
         # Define buttons as rectangles for collision detection
         continue_button = pygame.Rect(
             self.window.SCREEN_WIDTH / 2 - self.window.MENU_BUTTON_WIDTH / 2,
@@ -52,10 +42,10 @@ class StartMenu:
             self.window.MENU_BUTTON_WIDTH, self.window.MENU_BUTTON_HEIGHT
         )
 
-        # Get mouse position
+        # Get mouse position for click detection
         mouse_x, mouse_y = pygame.mouse.get_pos()
 
-        # Event handling loop
+        # Event handling loop for mouse clicks
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.state = "false"  # Quit the game
@@ -71,6 +61,7 @@ class StartMenu:
         return self.state
 
     def start_menu(self, state):
+        """Handles the start menu logic, drawing and selection."""
         # Draw the menu and check for selection
         self.draw()
         self.state = state

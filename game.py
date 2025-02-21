@@ -2,6 +2,7 @@ import pygame
 from start_menu import StartMenu
 from game_menu import GameMenu
 from fight import Fight
+from restart import Restart
 
 # Initialize Pygame and clock
 pygame.init()
@@ -16,14 +17,13 @@ class Game:
         # Initialize menus
         self.start_menu = StartMenu()
         self.game_menu = GameMenu()
+        self.restart = Restart()
 
-        # Initialise fight
+        # Initialize fight
         self.fight = Fight()
 
         # Game state and control variables
         self.run = True
-        """self.state = "start_menu"
-        attention test --->"""
         self.state = "start_menu"
 
         # Frame rate settings
@@ -38,7 +38,7 @@ class Game:
             # Set frame rate
             self.clock.tick(self.FPS)
 
-            # Handle main menu state
+            # Handle start menu state
             if self.state == "start_menu":
                 self.state = self.start_menu.start_menu(self.state)
 
@@ -46,15 +46,31 @@ class Game:
             if self.state == "false":
                 pygame.quit()
 
-            # Handle game continuation state
+            # Handle game continuation state (game menu)
             if self.state == "continue":
                 self.state = self.game_menu.game_menu(self.state)
 
-            # Handle game fight state
+            # Handle restart state
+            if self.state == "restart":
+                self.state = self.restart.restart(self.state)
+
+            # Handle fight state
             if self.state == "fight":
-                test = self.fight.draw_fight(self.state)
-                if test != ("lol", "lol"):
-                    print(test)
+                # Initialize my Pokemon if not already loaded
+                if not self.fight.my_pokemon:
+                    self.fight.load_my_pokemon()
+                # Initialize enemy Pokemon if not already loaded
+                if not self.fight.enemy_pokemon:
+                    self.fight.new_enemy()
+                self.state = self.fight.fight(self.state)
+
+            # Handle victory state
+            if self.state == "victory":
+                self.state = self.fight.victory(self.state)
+
+            # Handle loss state
+            if self.state == "loose":
+                self.state = self.fight.loose(self.state)
 
             # Update the display
             pygame.display.update()
