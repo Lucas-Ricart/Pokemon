@@ -1,5 +1,6 @@
 import json
 from pokemon import Pokemon
+from battle import Battle
 
 
 class Team:
@@ -191,3 +192,27 @@ def capture_pokemon(self, pokemon):
                     print(f"✅ {pokemon.name} has replaced {replaced_pokemon.name} in your team!")
                     return
             print("❌ Invalid choice, please try again.")
+            
+def heal_team(self):
+    """Heals all Pokémon in the team."""
+    for pokemon in self.pokemons:
+        pokemon.hp = pokemon.max_hp
+    print("🌟 Your team has been healed!")
+def remove_fainted_pokemon(self):
+        """Removes fainted Pokémon from the team."""
+        self.pokemons = [pokemon for pokemon in self.pokemons if not pokemon.is_fainted()]
+        print("💀 Fainted Pokémon have been removed from the team.")
+
+def get_average_level(self):
+        """Returns the average level of the team."""
+        if not self.pokemons:
+            return 0
+        return sum(pokemon.level for pokemon in self.pokemons) // len(self.pokemons)
+def increment_battle_count(self):
+    """Increments the battle counter and heals the team after 5 battles."""
+    self.battle_count += 1
+    if self.battle_count >= 5:
+        self.heal_team()
+        self.battle_count = 0  # Reset the counter
+
+

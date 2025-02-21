@@ -35,7 +35,15 @@ class Pokemon:
             self.exp -= exp_threshold
             self.level_up()
             exp_threshold = self.level * 10
+    def take_damage(self, damage):
+        """Reduces the Pokémon's HP by the given damage."""
+        self.hp = max(0, self.hp - damage)
+        if self.hp == 0:
+            print(f"💀 {self.name} has fainted!")
 
+    def is_fainted(self):
+        """Returns True if the Pokémon has fainted."""
+        return self.hp <= 0
     def level_up(self):
         """Increases the Pokémon's level and improves its stats."""
         self.level += 1
@@ -90,3 +98,20 @@ def fetch_pokemon(name):
     else:
         print(f"❌ {name} does not exist in the local Pokédex.")
         return None
+def assign_moves(self):
+        """Assigns moves based on the Pokémon's types."""
+        from constants import TYPE_ATTACKS
+        moves = []
+        for t in self.types:
+            if t in TYPE_ATTACKS:
+                # Use Attack or Special Attack, whichever is higher
+                power = self.special_attack if self.special_attack > self.attack else self.attack
+                moves.append(Move(TYPE_ATTACKS[t], power, t))
+        return moves
+
+def choose_move(self):
+        """Chooses a move based on the Pokémon's types."""
+        if not self.moves:
+            return None
+        # Randomly select a move from the available moves
+        return random.choice(self.moves)
